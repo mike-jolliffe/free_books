@@ -1,7 +1,7 @@
 # serializers.py
 from rest_framework import serializers
 
-from .models import Book, Author, Location, Location_Book, Author_Book
+from pages.models import Book, Author, Location, Location_Book, Author_Book
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

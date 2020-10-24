@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<ul>
+    {% for auth in a %}
+    <li>
+        {{auth.lastName}}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -14,7 +14,7 @@ class Book(models.Model):
 class Author(models.Model):
     lastName = models.CharField(max_length=60)
     firstName = models.CharField(max_length=30)
-    books = models.ManyToManyField('Book', through='Author_Book')
+    books = models.ManyToManyField('Book', through='Author_Book', related_name='authors')
 
     def __str__(self):
         return f"{self.firstName} {self.lastName}"
@@ -23,7 +23,7 @@ class Location(models.Model):
     facilityName = models.CharField(max_length=255)
     city = models.CharField(max_length=120)
     state = models.CharField(max_length=2)
-    books = models.ManyToManyField('Book', through='Location_Book')
+    books = models.ManyToManyField('Book', through='Location_Book', related_name='locations')
 
     def __str__(self):
         return f"{self.facilityName} - {self.city}, {self.state}"
@@ -38,3 +38,4 @@ class Location_Book(models.Model):
 class Author_Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.RESTRICT)
     book = models.ForeignKey(Book, on_delete=models.RESTRICT)
+    

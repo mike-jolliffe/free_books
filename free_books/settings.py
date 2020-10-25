@@ -29,14 +29,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'rest_framework',
-    'pages.apps.PagesConfig',
-    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pages.apps.PagesConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -113,6 +113,8 @@ USE_TZ = True
 STATICFILE_DIRS = [os.path.join(BASE_DIR, "pages", "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 try:
     from pages.local_settings import *

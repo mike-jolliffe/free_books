@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ location.facilityName }}</h1>
+  <p><strong>Location: {{location.city}}, {{location.state}}</strong></p>
+  <p><strong>Book(s):</strong> <a href="#">{{ location.books.all|join:", " }}</a></p>
+{% endblock %}

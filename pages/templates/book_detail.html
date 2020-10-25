@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Title: {{ book.title }}</h1>
+
+    <p><strong>Author(s):</strong> <a href="">{{ book.authors.all|join:", " }}</a></p>
+    <p><strong>Summary:</strong> {{ book.summary }}</p>
+    <p><strong>Language:</strong> {{ book.language }}</p>  
+    <p><strong>Genre:</strong> {{ book.genre.all|join:", " }}</p>     
+  
+    <h2>Inventory by Location</h2>
+        <table>
+            <th>Location Name</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Quantity Available</th>
+            {% for location in book.locations.all %}
+                <tr>
+                    <td>{{location.facilityName}}</td>
+                    <td>{{location.city}}</td>
+                    <td>{{location.state}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Name: {{ author }}</h1>
+  <p><strong>Book(s):</strong> <a href="#">{{ author.books.all|join:", " }}</a></p>
+{% endblock %}

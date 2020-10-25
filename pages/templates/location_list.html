@@ -6,7 +6,7 @@
   <ul>
     {% for location in location_list %}
       <li>
-        <a href="#">{{location.facilityName}} - {{ location.city }}, {{location.state}}</a>
+        <a href="{{ location.get_absolute_url }}">{{location.facilityName}} - {{ location.city }}, {{location.state}}</a>
       </li>
     {% endfor %}
   </ul>

@@ -7,7 +7,7 @@ from pages.models import Book, Author, Location, Location_Book, Author_Book
 # Create your views here.
 
 class BookViewSet(viewsets.ModelViewSet):
-    queryset = Book.objects.all().order_by('name')
+    queryset = Book.objects.all().order_by('title')
     serializer_class = BookSerializer
 
 class AuthorViewSet(viewsets.ModelViewSet):

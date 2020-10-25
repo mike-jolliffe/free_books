@@ -6,7 +6,7 @@ from pages.models import Book, Author, Location, Location_Book, Author_Book
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Book
-        fields = ('id', 'name', 'author', 'publicationDate')
+        fields = ('id', 'title', 'author', 'publicationDate')
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

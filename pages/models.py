@@ -4,12 +4,12 @@ from django.core import validators
 
 # Create your models here.
 class Book(models.Model):
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     publicationDate = models.DateField()
     # coverImage = 
 
     def __str__(self):
-        return self.name
+        return self.title
 
 class Author(models.Model):
     lastName = models.CharField(max_length=60)

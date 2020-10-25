@@ -22,6 +22,6 @@ from pages import views as page_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
+    path('api/', include('api.urls', namespace='api')),
     path('', include('pages.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

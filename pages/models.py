@@ -22,10 +22,6 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('book-detail', args=[str(self.id)])
 
-    # def getQtyAtLocation (self, location): 
-    #     location_book = Location_Book.objects.get(book=self, location=location) 
-    #     return location_book.quantity
-
 class Author(models.Model):
     lastName = models.CharField(max_length=60)
     firstName = models.CharField(max_length=30)
@@ -56,6 +52,11 @@ class Location_Book(models.Model):
     location = models.ForeignKey(Location, on_delete=models.RESTRICT)
     book = models.ForeignKey(Book, on_delete=models.RESTRICT)
     quantity = models.IntegerField(validators = [validators.MinValueValidator(0)])
+
+    @staticmethod
+    def getQuantity (book, location): 
+        location_book = Location_Book.objects.get(book=book, location=location) 
+        return location_book.quantity
 
 # Bridge table for Author and Book 
 class Author_Book(models.Model):

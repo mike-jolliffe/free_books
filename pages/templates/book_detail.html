@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load custom_tags %}
 
 {% block content %}
+    <img src="{{ book.coverImage.url }}" width="400" alt="Photo of book cover">
     <h1>Title: {{ book.title }}</h1>
-
     <p><strong>Author(s):</strong> <a href="">{{ book.authors.all|join:", " }}</a></p>
     <p><strong>Summary:</strong> {{ book.summary }}</p>
     <p><strong>Language:</strong> {{ book.language }}</p>  
@@ -19,6 +20,7 @@
                     <td>{{location.facilityName}}</td>
                     <td>{{location.city}}</td>
                     <td>{{location.state}}</td>
+                    <td>{% getQuantityAtLocation book location %}</td>
                 </tr>
             {% endfor %}
         </table>

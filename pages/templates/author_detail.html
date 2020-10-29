@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Name: {{ author }}</h1>
-  <p><strong>Book(s):</strong> <a href="#">{{ author.books.all|join:", " }}</a></p>
+  <h1>{{ author }}</h1>
+  <table class="table table-hover">
+    {% if author.books.all %}
+    <th>Book</th>
+      {% for book in author.books.all %}
+        <tr>
+          <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
+          <td></td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <td>There are no books by this author.</td>
+    {% endif %} 
+  </table>
 {% endblock %}

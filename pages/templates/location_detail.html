@@ -4,17 +4,17 @@
 {% block content %}
   <h1>{{ location.facilityName }}</h1>
   <p><strong>Location: {{location.city}}, {{location.state}}</strong></p>
-  <h2>Inventory by Location</h2>
-        <table>
+  <h2>Inventory</h2>
+        <table class="table table-hover">
             <th>Book Title</th>
             <th>Author(s)</th>
             <th>Quantity Available</th>
             {% for book in location.books.all %}
-                <tr>
-                    <td>{{book.title}}</td>
-                    <td>{{book.authors.all|join:", "}}</td>
-                    <td>{% getQuantityAtLocation book location %}</td>
-                </tr>
+              <tr>
+                <td>{{book.title}}</td>
+                <td>{{book.authors.all|join:", "}}</td>
+                <td>{% getQuantityAtLocation book location %}</td>
+              </tr>
             {% endfor %}
         </table>
 {% endblock %}

@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Location List</h1>
+  <h1 class="text-center">Locations</h1>
   {% if location_list %}
-  <ul>
+  <table class="table table-hover">
+    <th>Location Name</th>
+    <th>City</th>
+    <th>State</th>
     {% for location in location_list %}
-      <li>
-        <a href="{{ location.get_absolute_url }}">{{location.facilityName}} - {{ location.city }}, {{location.state}}</a>
-      </li>
+      <tr>
+        <td><a href="{{ location.get_absolute_url }}">{{location.facilityName}}</a></td> 
+        <td>{{ location.city }}</td> 
+        <td>{{location.state}}</a></td>
+      </tr>
     {% endfor %}
-  </ul>
+  </table>
   {% else %}
     <p>There are no books in the library.</p>
   {% endif %}       

@@ -9,8 +9,6 @@ admin.site.register(Author_Book)
 admin.site.register(Location)
 admin.site.register(Location_Book)
 
-#pizza = Author and toppings = books
-
 class AuthorAdmin(admin.ModelAdmin):
   filter_horizonal = ('books',)
 

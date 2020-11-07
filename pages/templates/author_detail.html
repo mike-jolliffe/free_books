@@ -2,6 +2,9 @@
 
 {% block content %}
   <h1>{{ author }}</h1>
+  {% if author.authorImage %}
+    <img src="{{ author.authorImage.url }}" width="400" alt="Photo of author">
+  {% endif %}
   <table class="table table-hover">
     {% if author.books.all %}
     <th>Book</th>

@@ -2,7 +2,9 @@
 {% load custom_tags %}
 
 {% block content %}
-    <img src="{{ book.coverImage.url }}" width="400" alt="Photo of book cover">
+    {% if book.coverImage %}
+        <img src="{{ book.coverImage.url }}" width="400" alt="Photo of book cover">
+    {% endif %}
     <h1>Title: {{ book.title }}</h1>
     <p><strong>Author(s):</strong> <a href="">{{ book.authors.all|join:", " }}</a></p>
     <p><strong>Summary:</strong> {{ book.summary }}</p>

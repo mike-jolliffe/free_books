@@ -54,8 +54,8 @@ class Location(models.Model):
 
 # Bridge table for Location and Book
 class Location_Book(models.Model):
-    location = models.ForeignKey(Location, on_delete=models.RESTRICT)
-    book = models.ForeignKey(Book, on_delete=models.RESTRICT)
+    location = models.ForeignKey(Location, on_delete=models.PROTECT)
+    book = models.ForeignKey(Book, on_delete=models.PROTECT)
     quantity = models.IntegerField(validators = [validators.MinValueValidator(0)])
 
     @staticmethod
@@ -65,5 +65,5 @@ class Location_Book(models.Model):
 
 # Bridge table for Author and Book 
 class Author_Book(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.RESTRICT)
-    book = models.ForeignKey(Book, on_delete=models.RESTRICT)
+    author = models.ForeignKey(Author, on_delete=models.PROTECT)
+    book = models.ForeignKey(Book, on_delete=models.PROTECT)

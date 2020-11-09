@@ -2,17 +2,31 @@
 {% load custom_tags %}
 
 {% block content %}
-    {% if book.coverImage %}
-        <img src="{{ book.coverImage.url }}" width="400" alt="Photo of book cover">
-    {% endif %}
-    <h1>Title: {{ book.title }}</h1>
-    <p><strong>Author(s):</strong> <a href="">{{ book.authors.all|join:", " }}</a></p>
-    <p><strong>Summary:</strong> {{ book.summary }}</p>
-    <p><strong>Language:</strong> {{ book.language }}</p>  
-    <p><strong>Genre:</strong> {{ book.genre.all|join:", " }}</p>     
-  
-    <h2>Inventory by Location</h2>
-        <table>
+    <div>
+        <a href="{% url 'books' %}" style="margin-left: 10px;"><i class="fa fa-arrow-left fa-2x"></i></a>
+    </div>
+    <div class="card bg-light mb-5 mx-auto" style="max-width: 28rem;">
+        {% if book.coverImage %}
+            <img class="card-img-top" src="{{ book.coverImage.url }}" alt="Card image cap">
+        {% endif %}
+        <div class="card-body">
+            <div class="col-lg-12 border-bottom" style="overflow: hidden;">
+                <a href="#" class="badge badge-secondary">{{ book.genre }}</a>
+                <div class="float-right">
+                    <a href="{% url 'book-update-form' book.id %}"><i class="fa fa-edit fa-2x" style="margin-right: 10px;" aria-hidden="true"></i></a>
+                    <a href="{% url 'book-delete-form' book.id %}"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <br>
+            <h3 class="card-title text-center">{{ book.title }}</h3>
+            <p class="card-text"><strong>Author(s):</strong> <a href="#">{{ book.authors.all|join:", " }}</a></p>
+            <p class="card-text"><strong>Summary:</strong> {{ book.summary }}</p>
+            <p class="card-text"><strong>Language:</strong> {{ book.language }}</p>
+        </div>
+    </div>
+    
+    <h2 class="text-center">Inventory by Location</h2>
+        <table class="table table-hover mx-auto" style="max-width: 80%">
             <th>Location Name</th>
             <th>City</th>
             <th>State</th>
@@ -22,7 +36,8 @@
                     <td>{{location.facilityName}}</td>
                     <td>{{location.city}}</td>
                     <td>{{location.state}}</td>
-                    <td>{% getQuantityAtLocation book location %}</td>
+                    <td><input type="number" style="text-align: center;" value="{% getQuantityAtLocation book location %}" min="0" max="1000" step="1"/></td>
+                    <!-- <td>{% getQuantityAtLocation book location %}</td> -->
                 </tr>
             {% endfor %}
         </table>

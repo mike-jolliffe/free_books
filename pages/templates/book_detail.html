@@ -3,7 +3,7 @@
 
 {% block content %}
     <div>
-        <a href="{% url 'books' %}" style="margin-left: 10px;"><i class="fa fa-arrow-left fa-2x"></i></a>
+        <a href="{% url 'books' %}" style="margin-left: 10px; color: #6c757d;"><i class="fa fa-arrow-left fa-2x"></i></a>
     </div>
     <div class="card bg-light mb-5 mx-auto" style="max-width: 28rem;">
         {% if book.coverImage %}
@@ -14,7 +14,7 @@
                 <a href="#" class="badge badge-secondary">{{ book.genre }}</a>
                 <div class="float-right">
                     <a href="{% url 'book-update-form' book.id %}"><i class="fa fa-edit fa-2x" style="margin-right: 10px;" aria-hidden="true"></i></a>
-                    <a href="{% url 'book-delete-form' book.id %}"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                    <a href="{% url 'book-delete-form' book.id %}"><i class="fa fa-trash fa-2x" aria-hidden="true" style="color: red"></i></a>
                 </div>
             </div>
             <br>
@@ -33,7 +33,7 @@
             <th>Quantity Available</th>
             {% for location in book.locations.all %}
                 <tr>
-                    <td>{{location.facilityName}}</td>
+                    <td><a href="{% url 'location-detail' location.id %}">{{location.facilityName}}</a></td>
                     <td>{{location.city}}</td>
                     <td>{{location.state}}</td>
                     <td><input type="number" style="text-align: center;" value="{% getQuantityAtLocation book location %}" min="0" max="1000" step="1"/></td>

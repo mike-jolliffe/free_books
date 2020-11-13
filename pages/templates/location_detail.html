@@ -2,8 +2,16 @@
 {% load custom_tags %}
 
 {% block content %}
-  <h1>{{ location.facilityName }}</h1>
-  <p><strong>Location: {{location.city}}, {{location.state}}</strong></p>
+  <div>
+    <a href="{% url 'locations' %}" style="margin-left: 10px; color: #6c757d;"><i class="fa fa-arrow-left fa-2x"></i></a>
+  </div>
+  {% if location.locationImage %}
+    <div>
+      <img src="{{ location.locationImage.url }}" alt="location image cap" class="img-fluid mx-auto d-block" style="max-width: 1000px;">
+    </div>
+  {% endif %}
+  <h1 class="text-center">{{ location.facilityName }}</h1>
+  <p class="text-center"><strong>Location: {{location.city}}, {{location.state}}</strong></p>
   <h2>Inventory</h2>
         <table class="table table-hover">
             <th>Book Title</th>
@@ -11,7 +19,7 @@
             <th>Quantity Available</th>
             {% for book in location.books.all %}
               <tr>
-                <td>{{book.title}}</td>
+                <td><a href="{{ book.get_absolute_url }}">{{ book.title }} </a></td> 
                 <td>{{book.authors.all|join:", "}}</td>
                 <td>{% getQuantityAtLocation book location %}</td>
               </tr>

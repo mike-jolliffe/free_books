@@ -1,8 +1,8 @@
-body {
+body, footer {
     font-family: 'Noto Sans JP', sans-serif;
     font-family: 'Roboto', sans-serif;
 }
 
-nav { margin-bottom: 10px;
-    
+.top-nav {
+    margin-bottom: 10px;
 }

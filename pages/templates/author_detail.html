@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>{{ author }}</h1>
+  <div>
+    <a href="{% url 'authors' %}" style="margin-left: 10px; color: #6c757d;"><i class="fa fa-arrow-left fa-2x"></i></a>
+  </div>
   {% if author.authorImage %}
-    <img src="{{ author.authorImage.url }}" width="400" alt="Photo of author">
+    <img src="{{ author.authorImage.url }}" width="400" alt="Photo of author" class="img-fluid mx-auto d-block">
   {% endif %}
+  <h1 class="text-center">{{ author }}</h1>
   <table class="table table-hover">
     {% if author.books.all %}
     <th>Book</th>

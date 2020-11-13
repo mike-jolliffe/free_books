@@ -45,6 +45,7 @@ class Location(models.Model):
     city = models.CharField(max_length=120)
     state = models.CharField(max_length=2)
     books = models.ManyToManyField('Book', through='Location_Book', related_name='locations')
+    locationImage = models.ImageField(upload_to='images/locations/', blank=True)
 
     def __str__(self):
         return f"{self.facilityName} - {self.city}, {self.state}"

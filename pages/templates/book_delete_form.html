@@ -1,4 +1,12 @@
-<form method="post">{% csrf_token %} 
-    <p>Are you sure you want to delete Author "{{ object }}"?</p> 
-    <input type="submit" value="Confirm"> 
-</form>
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="col-lg-6 mx-auto" style="margin-bottom: 50px;">
+        <form enctype="multipart/form-data" method="post">{% csrf_token %}
+            <p>Are you sure you want to delete Author "{{ object }}"?</p>
+            <input type="submit" class="btn btn-primary" value="Confirm">
+        </form>
+    </div>
+{% endblock %}

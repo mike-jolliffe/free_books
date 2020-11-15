@@ -17,11 +17,13 @@
             <th>Book Title</th>
             <th>Author(s)</th>
             <th>Quantity Available</th>
+            <th>Actions</th>
             {% for book in location.books.all %}
               <tr>
                 <td><a href="{{ book.get_absolute_url }}">{{ book.title }} </a></td> 
                 <td>{{book.authors.all|join:", "}}</td>
                 <td>{% getQuantityAtLocation book location %}</td>
+                <td><a href="{% url 'book-location-update-form' book.id location.id %}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a></td>
               </tr>
             {% endfor %}
         </table>

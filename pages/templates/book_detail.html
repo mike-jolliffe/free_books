@@ -31,6 +31,7 @@
             <th>City</th>
             <th>State</th>
             <th>Quantity Available</th>
+            <th>Actions</th>
             {% for location in book.locations.all %}
                 <tr>
                     <td><a href="{% url 'location-detail' location.id %}">{{location.facilityName}}</a></td>

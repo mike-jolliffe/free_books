@@ -11,6 +11,13 @@ class User(AbstractUser):
 
 # Create your models here.
 class Book(models.Model):
+    
+    class Meta:
+        db_table = 'pages_book'
+        constraints = [
+            models.UniqueConstraint(fields=['title', 'publicationDate'], name='unique title and date')
+        ]
+    
     YEAR_CHOICES = []
     for r in range(1900, (datetime.datetime.now().year+5    )):
         YEAR_CHOICES.append((r,r))
@@ -28,6 +35,13 @@ class Book(models.Model):
         return reverse('book-detail', args=[str(self.id)])
 
 class Author(models.Model):
+    
+    class Meta:
+        db_table = 'pages_author'
+        constraints = [
+            models.UniqueConstraint(fields=['lastName', 'firstName'], name='unique last and first name')
+        ]
+    
     lastName = models.CharField(max_length=60)
     firstName = models.CharField(max_length=30)
     books = models.ManyToManyField('Book', through='Author_Book', related_name='authors')

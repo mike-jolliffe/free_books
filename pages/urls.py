@@ -16,6 +16,7 @@ path('authors/<int:pk>/update', views.AuthorUpdateView.as_view(), name='author-u
 path('authors/<int:pk>/delete', views.AuthorDeleteView.as_view(), name='author-delete-form'), 
 path('locations/', views.LocationListView.as_view(), name='locations'),
 path('locations/create', views.LocationCreateView.as_view(), name='location-create-form'),
+path('locations/<int:book_pk>/<int:location_pk>', views.BookLocationUpdateView.as_view(), name='book-location-update-form'),
 path('locations/<int:pk>', views.LocationDetailView.as_view(), name='location-detail'),
 path('locations/<int:pk>/update', views.LocationUpdateView.as_view(), name='location-update-form'),
 path('locations/<int:pk>/delete', views.LocationDeleteView.as_view(), name='location-delete-form'), 

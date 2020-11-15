@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.urls import reverse
 from django.views import generic
-from .models import Author, Book, Location
+from .models import Author, Book, Location, Location_Book
 
 
 
@@ -78,6 +79,23 @@ class LocationDeleteView(generic.edit.DeleteView):
     template_name = 'location_delete_form.html'
     success_url = '/locations'
 
+class BookLocationUpdateView(generic.edit.UpdateView):
+    model = Location_Book
+    fields = ['book','location','quantity']
+    template_name = 'book_location_update_form.html'
+    
+    def get_object(self, *args, **kwargs):
+        # This method should return a queryset that represents the items to be listed in the view.
+        # I think you intend on listing categories in your view, in which case consider changing the view's name to CategoryListView. Just sayin'...
+        # An instance of this view has a dictionary called `kwargs` that has the url parameters, so you can do the following:
+
+        # You need some null assertions here because of the way you've setup your URLs
+        obj = Location_Book.objects.get(book_id=self.kwargs['book_pk'], location_id=self.kwargs['location_pk'])
+        print(obj)
+        return obj 
+
+    def get_success_url(self):
+        return reverse('book-detail', args=str(self.kwargs['book_pk']))
 # @permission_required('polls.add_choice')
 
     

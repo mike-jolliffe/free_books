@@ -19,7 +19,13 @@
             </div>
             <br>
             <h3 class="card-title text-center">{{ book.title }}</h3>
-            <p class="card-text"><strong>Author(s):</strong> <a href="#">{{ book.authors.all|join:", " }}</a></p>
+            <p class="card-text"><strong>Author(s):</strong>
+                <br> 
+                {% for author in book.authors.all %}
+                    <span><a href="{% url 'author-detail' author.id %}">{{ author }}</a></span>
+                    <br>
+                {% endfor %}
+            </p>
             <p class="card-text"><strong>Summary:</strong> {{ book.summary }}</p>
             <p class="card-text"><strong>Language:</strong> {{ book.language }}</p>
         </div>

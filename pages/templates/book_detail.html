@@ -44,7 +44,8 @@
                     <td>{{location.city}}</td>
                     <td>{{location.state}}</td>
                     <td>{% getQuantityAtLocation book location %}</td>
-                    <td><a href="{% url 'book-location-update-form' book.id location.id %}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a></td>
+                    <td><a href="{% url 'book-location-update-form' book_pk=book.id location_pk=location.id %}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a></td>
+                    <td><a href="{% url 'book-location-delete-form' book_pk=book.id location_pk=location.id %}"><i class="fa fa-trash fa-lg" style="color: red" aria-hidden="true"></i></a></td>
                 </tr>
             {% endfor %}
         </table>

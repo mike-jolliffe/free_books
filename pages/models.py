@@ -27,6 +27,7 @@ class Book(models.Model):
     language = models.CharField(max_length=30, blank=True)
     genre = models.CharField(max_length=60, blank=True)
     coverImage = models.ImageField(upload_to='images/books/', blank=True)
+    authors = models.ManyToManyField('Author', through='Author_Book', related_name='author_books')
 
     def __str__(self):
         return self.title
@@ -44,7 +45,7 @@ class Author(models.Model):
     
     lastName = models.CharField(max_length=60)
     firstName = models.CharField(max_length=30)
-    books = models.ManyToManyField('Book', through='Author_Book', related_name='authors')
+    books = models.ManyToManyField('Book', through='Author_Book', related_name='book_authors')
     authorImage = models.ImageField(upload_to='images/authors/', blank=True)
 
 

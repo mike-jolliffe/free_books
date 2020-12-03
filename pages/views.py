@@ -24,7 +24,7 @@ class BookUpdateView(generic.edit.UpdateView):
 
 class BookCreateView(generic.edit.CreateView):
     model = Book
-    fields = ['title', 'publicationDate', 'summary', 'language', 'genre', 'coverImage']
+    fields = ['title', 'publicationDate', 'summary', 'language', 'genre', 'coverImage', 'authors']
     template_name = 'book_create_form.html'
 
 class BookDeleteView(generic.edit.DeleteView):
@@ -94,8 +94,6 @@ class BookLocationUpdateView(generic.edit.UpdateView):
             return 'locations'
 
     def get_object(self, *args, **kwargs):
-        print(self.kwargs)
-        #get route
         obj = Location_Book.objects.get(book_id=self.kwargs['book_pk'], location_id=self.kwargs['location_pk'])
         return obj 
 

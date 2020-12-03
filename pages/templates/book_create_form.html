@@ -4,8 +4,9 @@
 
 {% block content %}
     <div class="col-lg-6 mx-auto" style="margin-bottom: 50px;">
-        <form enctype="multipart/form-data" method="post">{% csrf_token %}
+        <form id="thisForm" enctype="multipart/form-data" method="post">{% csrf_token %}
             {{ form|crispy }}
+            <br><br>
             <input type="submit" class="btn btn-primary" value="Submit">
         </form>
     </div>

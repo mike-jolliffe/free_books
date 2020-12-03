@@ -158,4 +158,6 @@ $(document).ready(function ($) {
     };
     $('#bookForm').goValidate();
 
+    $('select').selectpicker();
+
 });

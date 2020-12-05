@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import permission_required
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.urls import resolve, reverse
 from django.views import generic
@@ -77,6 +77,30 @@ class LocationDeleteView(generic.edit.DeleteView):
     model = Location
     template_name = 'location_delete_form.html'
     success_url = '/locations'
+
+class BookLocationCreateView(generic.edit.CreateView):
+    '''Associating a book to a location'''
+    model = Location_Book
+    fields = ['book', 'quantity']
+    template_name = 'location_book_create_form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+        Overridden so we can make sure the `Ipsum` instance exists
+        before going any further.
+        """
+        self.location = get_object_or_404(Location, pk=kwargs['location_pk'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        """
+        Overridden to add the ipsum relation to the `Lorem` instance.
+        """
+        form.instance.location = self.location
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('location-detail', args=str(self.kwargs['location_pk']))
 
 class BookLocationUpdateView(generic.edit.UpdateView):
     '''Updating quantity within the books route'''

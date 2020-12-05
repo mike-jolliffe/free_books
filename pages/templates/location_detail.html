@@ -29,7 +29,7 @@
       <h2>Inventory</h2>
     </div>
     <div class="col-lg-9">
-      <a class="float-right btn btn-primary" href="#">+ Add a Book to this Location</a> <!-- re-use the book-location-update-form but diff url with no PK for book -->
+      <a class="float-right btn btn-primary" href="{% url 'location-book-create-form' location_pk=location.id %}">+ Add a Book to this Location</a> <!-- re-use the book-location-update-form but diff url with no PK for book -->
     </div>
   </div>
   <table class="table table-hover">

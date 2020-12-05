@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.urls import resolve, reverse
 from django.views import generic
-from .models import Author, Book, Location, Location_Book
+from .models import Author, Book, Author_Book, Location, Location_Book
 
 
 def index(request):
@@ -54,6 +54,30 @@ class AuthorDeleteView(generic.edit.DeleteView):
     model = Author
     template_name = 'author_delete_form.html'
     success_url = '/authors'
+
+class AuthorBookCreateView(generic.edit.CreateView):
+    '''Associating a book to an author'''
+    model = Author_Book
+    fields = ['book']
+    template_name = 'author_book_create_form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+        Overridden so we can make sure the `Ipsum` instance exists
+        before going any further.
+        """
+        self.author = get_object_or_404(Author, pk=kwargs['author_pk'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        """
+        Overridden to add the ipsum relation to the `Lorem` instance.
+        """
+        form.instance.author = self.author
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('author-detail', args=str(self.kwargs['author_pk']))
 
 class LocationListView(generic.ListView):
     model = Location

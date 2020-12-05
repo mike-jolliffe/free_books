@@ -19,9 +19,17 @@
         <h3 class="card-title text-center">{{ author }}</h3>
     </div>
   </div>
+  <div class="row">
+    <div class="col-lg-5">
+      <h2>Books by this Author</h2>
+    </div>
+    <div class="col-lg-7">
+      <a class="float-right btn btn-primary" href="{% url 'author-book-create-form' author_pk=author.id %}">+ Add a Book for this Author</a>
+    </div>
+  </div>
   <table class="table table-hover">
     {% if author.books.all %}
-    <th>Book</th>
+    <th>Title</th>
       {% for book in author.books.all %}
         <tr>
           <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>

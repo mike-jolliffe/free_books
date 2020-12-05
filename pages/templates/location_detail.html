@@ -24,20 +24,29 @@
         <p class="text-center"><strong>Location: {{location.city}}, {{location.state}}</strong></p>
     </div>
   </div>
-  <h2>Inventory</h2>
-        <table class="table table-hover">
-            <th>Book Title</th>
-            <th>Author(s)</th>
-            <th>Quantity Available</th>
-            <th>Actions</th>
-            {% for book in location.books.all %}
-              <tr>
-                <td><a href="{{ book.get_absolute_url }}">{{ book.title }} </a></td> 
-                <td>{{book.authors.all|join:", "}}</td>
-                <td>{% getQuantityAtLocation book location %}</td>
-                <td><a href="{% url 'book-location-update-form' book_pk=book.id location_pk=location.id %}"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a></td>
-                <td><a href="{% url 'book-location-delete-form' book_pk=book.id location_pk=location.id %}"><i class="fa fa-trash fa-lg" style="color: red;" aria-hidden="true"></i></a></td>
-              </tr>
-            {% endfor %}
-        </table>
+  <div class="row">
+    <div class="col-lg-3">
+      <h2>Inventory</h2>
+    </div>
+    <div class="col-lg-9">
+      <a class="float-right btn btn-primary" href="#">+ Add a Book to this Location</a> <!-- re-use the book-location-update-form but diff url with no PK for book -->
+    </div>
+  </div>
+  <table class="table table-hover">
+      <th>Book Title</th>
+      <th>Author(s)</th>
+      <th>Quantity Available</th>
+      <th>Actions</th>
+      {% for book in location.books.all %}
+        <tr>
+          <td><a href="{{ book.get_absolute_url }}">{{ book.title }} </a></td> 
+          <td>{{book.authors.all|join:", "}}</td>
+          <td>{% getQuantityAtLocation book location %}</td>
+          <td>
+            <a href="{% url 'book-location-update-form' book_pk=book.id location_pk=location.id %}"><i class="fa fa-edit fa-lg" aria-hidden="true" style="margin-right: 10px;"></i></a>
+            <a href="{% url 'book-location-delete-form' book_pk=book.id location_pk=location.id %}"><i class="fa fa-trash fa-lg" style="color: red;" aria-hidden="true"></i></a>
+          </td>
+        </tr>
+      {% endfor %}
+  </table>
 {% endblock %}

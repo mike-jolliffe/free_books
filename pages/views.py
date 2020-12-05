@@ -19,7 +19,7 @@ class BookDetailView(generic.DetailView):
 
 class BookUpdateView(generic.edit.UpdateView):
     model = Book
-    fields = ['title', 'publicationDate', 'summary', 'language', 'genre', 'coverImage']
+    fields = ['title', 'publicationDate', 'summary', 'language', 'genre', 'coverImage', 'authors']
     template_name = 'book_update_form.html'
 
 class BookCreateView(generic.edit.CreateView):
@@ -42,12 +42,12 @@ class AuthorDetailView(generic.DetailView):
 
 class AuthorUpdateView(generic.edit.UpdateView):
     model = Author
-    fields = ['lastName', 'firstName', 'authorImage']
+    fields = ['lastName', 'firstName', 'authorImage', 'books']
     template_name = 'author_update_form.html'
 
 class AuthorCreateView(generic.edit.CreateView):
     model = Author
-    fields = ['lastName', 'firstName', 'authorImage']
+    fields = ['lastName', 'firstName', 'authorImage', 'books']
     template_name = 'author_create_form.html'
 
 class AuthorDeleteView(generic.edit.DeleteView):

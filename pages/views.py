@@ -1,13 +1,30 @@
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import permission_required
-from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.urls import resolve, reverse
 from django.views import generic
 from .models import Author, Book, Author_Book, Location, Location_Book
+from pages.forms import SignUpForm
 
 
 def index(request):
     return render(request, 'index.html')
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
 
 class BookListView(generic.ListView):
     model = Book

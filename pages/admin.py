@@ -2,9 +2,10 @@ from django import forms
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import FilteredSelectMultiple
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
-from .models import Book, Author, Location, Author_Book, Location_Book
+from .models import Book, Author, Location, Author_Book, Location_Book, CustomUser
 admin.site.register(Author_Book)
 admin.site.register(Location)
 admin.site.register(Location_Book)
@@ -49,3 +50,4 @@ class BookAdmin(admin.ModelAdmin):
 
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Book, BookAdmin)
+admin.site.register(CustomUser, UserAdmin)

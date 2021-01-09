@@ -5,7 +5,11 @@ from django.core import validators
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-class User(AbstractUser):
+class CustomUser(AbstractUser):
+    class Meta:
+         db_table = 'auth_user'
+         app_label = 'auth'
+
     phone_number = models.CharField(max_length=50, null=True, blank=True, default="000-000-0000")
     bio = models.TextField()
 

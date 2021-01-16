@@ -9,7 +9,7 @@
     </div>
     <div class="row">
       <div class="col-lg-12">
-        {% if perms.pages.can_create_book %}
+        {% if perms.pages.can_add_book %}
           <a class="float-right btn btn-primary" href="{% url 'book-create-form' %}">+ Add New Book</a>
         {% endif %}
       </div>

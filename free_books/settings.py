@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['016c87bd6795.ngrok.io', 'localhost']
 
 
 # Application definition

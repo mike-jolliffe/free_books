@@ -49,10 +49,10 @@
           <td>{{book.authors.all|join:", "}}</td>
           <td>{% getQuantityAtLocation book location %}</td>
           <td>
-            {% if perms.pages.can_change_location_book %}
+            {% if perms.pages.change_location_book %}
               <a href="{% url 'book-location-update-form' book_pk=book.id location_pk=location.id %}"><i class="fa fa-edit fa-lg" aria-hidden="true" style="margin-right: 10px;"></i></a>
             {% endif %}
-            {% if perms.pages.can_delete_location_book %}
+            {% if perms.pages.delete_location_book %}
               <a href="{% url 'book-location-delete-form' book_pk=book.id location_pk=location.id %}"><i class="fa fa-trash fa-lg" style="color: red;" aria-hidden="true"></i></a>
             {% endif %}
           </td>

@@ -11,10 +11,10 @@
     <div class="card-body">
         <div class="col-lg-12 border-bottom" style="overflow: hidden;">
             <div class="float-right">
-              {% if perms.pages.can_change_author %}  
+              {% if perms.pages.change_author %}  
                 <a href="{% url 'author-update-form' author.id %}"><i class="fa fa-edit fa-2x" style="margin-right: 10px;" aria-hidden="true"></i></a>
               {% endif %}
-              {% if perms.pages.can_delete_author %}
+              {% if perms.pages.delete_author %}
                 <a href="{% url 'author-delete-form' author.id %}"><i class="fa fa-trash fa-2x" aria-hidden="true" style="color: red"></i></a>
               {% endif %}
             </div>
@@ -28,7 +28,7 @@
       <h2>Books by this Author</h2>
     </div>
     <div class="col-lg-7">
-      {% if perms.pages.can_add_author_book %}
+      {% if perms.pages.add_author_book %}
         <a class="float-right btn btn-primary" href="{% url 'author-book-create-form' author_pk=author.id %}">+ Add a Book for this Author</a>
       {% endif %}
     </div>

@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.urls import resolve, reverse
 from django.views import generic
+from braces.views import LoginRequiredMixin, GroupRequiredMixin
 from .models import Author, Book, Author_Book, Location, Location_Book
 from pages.forms import SignUpForm
 
@@ -34,17 +35,20 @@ class BookDetailView(generic.DetailView):
     model = Book 
     template_name = 'book_detail.html'
 
-class BookUpdateView(generic.edit.UpdateView):
+class BookUpdateView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.UpdateView):
+    group_required = "InventoryManager"
     model = Book
     fields = ['title', 'publicationDate', 'summary', 'language', 'genre', 'coverImage', 'authors']
     template_name = 'book_update_form.html'
 
-class BookCreateView(generic.edit.CreateView):
+class BookCreateView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.CreateView):
+    group_required = "InventoryManager"
     model = Book
     fields = ['title', 'publicationDate', 'summary', 'language', 'genre', 'coverImage', 'authors']
     template_name = 'book_create_form.html'
 
-class BookDeleteView(generic.edit.DeleteView):
+class BookDeleteView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.DeleteView):
+    group_required = "InventoryManager"
     model = Book
     template_name = 'book_delete_form.html'
     success_url = '/books'
@@ -57,23 +61,27 @@ class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'author_detail.html'
 
-class AuthorUpdateView(generic.edit.UpdateView):
+class AuthorUpdateView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.UpdateView):
+    group_required = "InventoryManager"
     model = Author
     fields = ['lastName', 'firstName', 'authorImage', 'books']
     template_name = 'author_update_form.html'
 
-class AuthorCreateView(generic.edit.CreateView):
+class AuthorCreateView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.CreateView):
+    group_required = "InventoryManager"
     model = Author
     fields = ['lastName', 'firstName', 'authorImage', 'books']
     template_name = 'author_create_form.html'
 
-class AuthorDeleteView(generic.edit.DeleteView):
+class AuthorDeleteView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.DeleteView):
+    group_required = "Inventory Manager"
     model = Author
     template_name = 'author_delete_form.html'
     success_url = '/authors'
 
-class AuthorBookCreateView(generic.edit.CreateView):
+class AuthorBookCreateView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.CreateView):
     '''Associating a book to an author'''
+    group_required = "Inventory Manager"
     model = Author_Book
     fields = ['book']
     template_name = 'author_book_create_form.html'
@@ -104,23 +112,27 @@ class LocationDetailView(generic.DetailView):
     model = Location
     template_name = 'location_detail.html'
 
-class LocationUpdateView(generic.edit.UpdateView):
+class LocationUpdateView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.UpdateView):
+    group_required = "InventoryManager"
     model = Location
     fields = ['facilityName', 'city', 'state']
     template_name = 'location_update_form.html'
 
-class LocationCreateView(generic.edit.CreateView):
+class LocationCreateView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.CreateView):
+    group_required = "InventoryManager"
     model = Location
     fields = ['facilityName', 'city', 'state']
     template_name = 'location_create_form.html'
 
-class LocationDeleteView(generic.edit.DeleteView):
+class LocationDeleteView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.DeleteView):
+    group_required = "InventoryManager"
     model = Location
     template_name = 'location_delete_form.html'
     success_url = '/locations'
 
-class BookLocationCreateView(generic.edit.CreateView):
+class BookLocationCreateView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.CreateView):
     '''Associating a book to a location'''
+    group_required = "InventoryManager"
     model = Location_Book
     fields = ['book', 'quantity']
     template_name = 'location_book_create_form.html'
@@ -143,8 +155,9 @@ class BookLocationCreateView(generic.edit.CreateView):
     def get_success_url(self):
         return reverse('location-detail', args=str(self.kwargs['location_pk']))
 
-class BookLocationUpdateView(generic.edit.UpdateView):
+class BookLocationUpdateView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.UpdateView):
     '''Updating quantity within the books route'''
+    group_required = "InventoryManager"
     model = Location_Book
     fields = ['book','location','quantity']
     template_name = 'book_location_update_form.html'
@@ -169,8 +182,9 @@ class BookLocationUpdateView(generic.edit.UpdateView):
         else:
             return reverse('location-detail', args=str(self.kwargs['location_pk']))
 
-class BookLocationDeleteView(generic.edit.DeleteView):
+class BookLocationDeleteView(LoginRequiredMixin, GroupRequiredMixin, generic.edit.DeleteView):
     '''Removing book from list at given location'''
+    group_required = "InventoryManager"
     model = Location_Book
     fields = ['book','location','quantity']
     template_name = 'book_location_delete_form.html'
